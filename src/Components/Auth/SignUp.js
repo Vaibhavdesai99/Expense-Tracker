@@ -1,6 +1,6 @@
 import React, { useRef ,useState} from "react";
 import "./SignUp.css";
-
+import Navbar from "../Nav/Navbar";
 const SignUp = () => {
     const [loadingText, setLoadingText] = useState("");
     const [error, setError] = useState("");
@@ -71,6 +71,7 @@ const SignUp = () => {
 
   return (
     <div>
+      <Navbar/>
       <form className="MainForm" onSubmit={formSubmitHandler}>
         <h2>SignUp</h2>
         <div className="formBody">
