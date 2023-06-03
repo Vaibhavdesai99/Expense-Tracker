@@ -1,41 +1,32 @@
 import React, { useRef ,useState} from "react";
-import "./SignUp.css";
+import "./LogIn.css";
 import Navbar from "../Nav/Navbar";
 import { Link } from "react-router-dom";
-import {useNavigate} from 'react-router-dom'
-const SignUp = () => {
+import { useNavigate } from "react-router-dom";
+const LogIn = () => {
     const [loadingText, setLoadingText] = useState("");
     const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-  
-    const navigate = useNavigate()
+   
+    const naviagte= useNavigate()
     const emailRef = useRef();
     const passwordRef = useRef();
-    const confirmPassRef = useRef();
+ 
   
     const formSubmitHandler = async (e) => {
       e.preventDefault();
   
       const enteredEmail = emailRef.current.value;
       const enteredPassword = passwordRef.current.value;
-      const enteredConfirmPassword = confirmPassRef.current.value;
-  
-      if (enteredPassword !== enteredConfirmPassword) {
-        setError("Passwords do not match");
-        return;
-      }
-  
       setLoadingText("...Loading");
   
     try {
       const response = await fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChL1Ble9vYdH4G9vr7sAoWbb69tliAb-s',
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyChL1Ble9vYdH4G9vr7sAoWbb69tliAb-s',
         {
           method: 'POST',
           body: JSON.stringify({
             email: enteredEmail,
             password: enteredPassword,
-            confirmPassword: enteredConfirmPassword,
             returnSecureToken: true,
           }),
           headers: {
@@ -46,10 +37,10 @@ const SignUp = () => {
       );
       console.log(response)
       if (response.ok) {
+        naviagte('/Home')
         const data = await response.json()
-        navigate('/LogIn')
         console.log(data)
-        console.log(data.email)
+        console.log(data.idToken)
         alert("Successfully created account")
         setLoadingText("");
         setError("");
@@ -57,8 +48,7 @@ const SignUp = () => {
         // To Clear  Input Fields :
         emailRef.current.value = "";
         passwordRef.current.value = "";
-        confirmPassRef.current.value = "";
-      
+    
       } else {
         const errorData = await response.json();
         console.log(errorData)
@@ -67,11 +57,9 @@ const SignUp = () => {
       
         setError(errorMessage);
         setLoadingText("");
-        setSuccessMessage('')
-        
+       
       }
     } catch (error) {
-      console.log(error);
       setError("Network or other error occurred");
       setLoadingText("");
     }
@@ -81,7 +69,7 @@ const SignUp = () => {
     <div>
       <Navbar/>
       <form className="MainForm" onSubmit={formSubmitHandler}>
-        <h2>SignUp</h2>
+        <h2>LogIn</h2>
         <div className="formBody">
           <div className="email">
             <label className="email_label">Email</label>
@@ -96,36 +84,29 @@ const SignUp = () => {
               required
             />
           </div>
-          <div className="confirmPassword">
-            <label className="confirmPassword_label">Confirm Password</label>
-            <input
-              type="password"
-              placeholder="confirmPassword"
-              ref={confirmPassRef}
-              required
-            />
-            {error && <p className="error-message">{error}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
-          </div>
+         {error && <p>{error}</p>}
           <div className="SignUpBtn">
             {!loadingText ? (
-              <button type="submit">SignUp</button>
+              <button type="submit">LogIn</button>
             ) : (
               <p>{loadingText}</p>
             )}
           </div>
+          <div className="forgetPass">
+            <Link to='/'>Forget Password</Link>
+          </div>
         </div>
       </form>
       <div className="secondBox">
-        <Link to= '/LogIn'>
-        Have an account ? Login
+        <Link to='/SignUp'>
+        Don't Have an account ? SignUp
         </Link>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default LogIn;
 
 
 
