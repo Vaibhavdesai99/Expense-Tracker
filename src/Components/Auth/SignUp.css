@@ -1,0 +1,89 @@
+.MainForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  margin: 5rem auto;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.formBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 70%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.email,
+.password,
+.confirmPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.email_label,
+.password_label,
+.confirmPassword_label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 0.5rem;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+.SignUpBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.secondBox {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+  width: 31%;
+  margin: -4rem auto;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
