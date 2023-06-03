@@ -1,12 +1,13 @@
-import React, { useRef ,useState} from "react";
+import React, { useContext, useRef ,useState} from "react";
 import "./LogIn.css";
 import Navbar from "../Nav/Navbar";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../Store/AuthContext";
 const LogIn = () => {
     const [loadingText, setLoadingText] = useState("");
     const [error, setError] = useState("");
-   
+    const authCtx = useContext(AuthContext)
     const naviagte= useNavigate()
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -40,7 +41,9 @@ const LogIn = () => {
         naviagte('/Home')
         const data = await response.json()
         console.log(data)
-        console.log(data.idToken)
+      
+        // Passing token to login context then in that we store that token to localStorage 
+        authCtx.login(data.idToken)
         alert("Successfully created account")
         setLoadingText("");
         setError("");
