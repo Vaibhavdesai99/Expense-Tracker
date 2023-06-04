@@ -1,4 +1,4 @@
-import React, {  useState  } from "react";
+import React, { useState } from "react";
 
 const AuthContext = React.createContext({
   token: "",
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(initialToken);
   const userisLoggedIn = !!token;
 
-//Storing the token to localStorage :
+  //Storing the token to localStorage :
   const loginHandler = (token) => {
     setToken(token);
     localStorage.setItem("token", token);
@@ -31,9 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 

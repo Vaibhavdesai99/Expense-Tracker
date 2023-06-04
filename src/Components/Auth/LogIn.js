@@ -1,66 +1,62 @@
-import React, { useContext, useRef ,useState} from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./LogIn.css";
-import Navbar from "../Nav/Navbar";
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
 const LogIn = () => {
-    const [loadingText, setLoadingText] = useState("");
-    const [error, setError] = useState("");
-    const authCtx = useContext(AuthContext)
-    const naviagte= useNavigate()
-    const emailRef = useRef();
-    const passwordRef = useRef();
- 
-  
-    const formSubmitHandler = async (e) => {
-      e.preventDefault();
-  
-      const enteredEmail = emailRef.current.value;
-      const enteredPassword = passwordRef.current.value;
-      setLoadingText("...Loading");
-  
+  const [loadingText, setLoadingText] = useState("");
+  const [error, setError] = useState("");
+  const authCtx = useContext(AuthContext);
+  const naviagte = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+    setLoadingText("...Loading");
+
     try {
       const response = await fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyChL1Ble9vYdH4G9vr7sAoWbb69tliAb-s',
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyChL1Ble9vYdH4G9vr7sAoWbb69tliAb-s",
         {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify({
             email: enteredEmail,
             password: enteredPassword,
             returnSecureToken: true,
           }),
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
-       
       );
-      console.log(response)
+      console.log(response);
       if (response.ok) {
-        naviagte('/Home')
-        const data = await response.json()
-        console.log(data)
-      
-        // Passing token to login context then in that we store that token to localStorage 
-        authCtx.login(data.idToken)
-        alert("Successfully created account")
+        naviagte("/Home");
+        const data = await response.json();
+        console.log(data);
+
+        // Passing token to login context then in that we store that token to localStorage
+        authCtx.login(data.idToken);
+        alert("Successfully created account");
         setLoadingText("");
         setError("");
 
         // To Clear  Input Fields :
         emailRef.current.value = "";
         passwordRef.current.value = "";
-    
       } else {
         const errorData = await response.json();
-        console.log(errorData)
+        console.log(errorData);
         const errorMessage = errorData.error.message;
         console.log(errorMessage);
-      
+
         setError(errorMessage);
         setLoadingText("");
-       
       }
     } catch (error) {
       setError("Network or other error occurred");
@@ -70,7 +66,6 @@ const LogIn = () => {
 
   return (
     <div>
-      <Navbar/>
       <form className="MainForm" onSubmit={formSubmitHandler}>
         <h2>LogIn</h2>
         <div className="formBody">
@@ -87,7 +82,7 @@ const LogIn = () => {
               required
             />
           </div>
-         {error && <p>{error}</p>}
+          {error && <p>{error}</p>}
           <div className="SignUpBtn">
             {!loadingText ? (
               <button type="submit">LogIn</button>
@@ -96,24 +91,15 @@ const LogIn = () => {
             )}
           </div>
           <div className="forgetPass">
-            <Link to='/'>Forget Password</Link>
+            <Link to="/">Forget Password</Link>
           </div>
         </div>
       </form>
       <div className="secondBox">
-        <Link to='/SignUp'>
-        Don't Have an account ? SignUp
-        </Link>
+        <Link to="/SignUp">Don't Have an account ? SignUp</Link>
       </div>
     </div>
   );
 };
 
 export default LogIn;
-
-
-
-
-
-
-

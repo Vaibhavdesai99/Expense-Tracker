@@ -1,0 +1,21 @@
+.main_div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.complete_profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin-right: 1rem;
+}

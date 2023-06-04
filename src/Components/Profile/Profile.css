@@ -1,0 +1,52 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.PhotoURL {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.btn {
+  margin-top: 4rem;
+  margin-left: 18rem;
+}
+
+button {
+  color: black;
+}
+hr {
+  border: none;
+  border-top: 0.5px solid black;
+  margin: 1rem 0;
+}
+
+.error {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: bold;
+  margin-top: 3rem;
+}
