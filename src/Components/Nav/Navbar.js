@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import AuthContext from "../Store/AuthContext";
 const Navbar = () => {
+  const authCtx = useContext(AuthContext);
+
+  // LogOut Handler:
+  const logOut = () => {
+    authCtx.logout();
+  };
   return (
     <nav className="navbar">
       <ul className="navbar__list">
@@ -20,6 +27,19 @@ const Navbar = () => {
             Products
           </Link>
         </li>
+        <Link to="/LogIn">
+          <button
+            style={{
+              color: "white",
+              background: "black",
+              padding: "5px 9px",
+              borderRadius: "10px",
+            }}
+            onClick={logOut}
+          >
+            Logout
+          </button>
+        </Link>
       </ul>
     </nav>
   );

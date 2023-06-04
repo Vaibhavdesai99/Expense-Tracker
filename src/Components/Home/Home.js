@@ -59,8 +59,29 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <h1>Verify Your Email Here...!</h1>
-      <button onClick={EmailVerifire}>Verify Email</button>
+      <div
+        className="emailVerifier"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "5rem",
+        }}
+      >
+        <h1 style={{ color: "red" }}>Verify Your Email Here...!</h1>
+        <button
+          style={{
+            padding: "3px 9px",
+            backgroundColor: "red",
+            color: "white",
+            borderRadius: "5px",
+          }}
+          onClick={EmailVerifire}
+        >
+          Verify Email
+        </button>
+      </div>
     </>
   );
 };

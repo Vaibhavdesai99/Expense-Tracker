@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./Components/Auth/SignUp";
 import LogIn from "./Components/Auth/LogIn";
@@ -7,11 +7,14 @@ import About from "./Components/About/About";
 import Product from "./Components/Product/Product";
 import Navbar from "./Components/Nav/Navbar";
 import Profile from "./Components/Profile/Profile";
+import AuthContext from "./Components/Store/AuthContext";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
   return (
     <BrowserRouter>
-      <Navbar />
+      {isLoggedIn && <Navbar />}
       <Routes>
         <Route exact path="/SignUp" element={<SignUp />} />
         <Route path="/LogIn" element={<LogIn />} />
