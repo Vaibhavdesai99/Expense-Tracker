@@ -1,0 +1,42 @@
+.ExpenseList {
+  margin-top: 20px;
+}
+
+.ExpenseList h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.ExpenseList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ExpenseList-item {
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.ExpenseList-amount {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.ExpenseList-description {
+  color: #4caf50;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.ExpenseList-category {
+  color: #4caf50;
+  margin-left: 10px;
+  font-weight: bold;
+}

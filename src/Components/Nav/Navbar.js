@@ -27,6 +27,12 @@ const Navbar = () => {
             Products
           </Link>
         </li>
+
+        <li className="navbar__item">
+          <Link to="/Expenses" className="navbar__link">
+            Expenses
+          </Link>
+        </li>
         <Link to="/LogIn">
           <button
             style={{

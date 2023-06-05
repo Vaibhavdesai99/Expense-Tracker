@@ -42,7 +42,7 @@ const LogIn = () => {
 
         // Passing token to login context then in that we store that token to localStorage
         authCtx.login(data.idToken);
-        alert("Successfully created account");
+        alert("Successfully Logged In ");
         setLoadingText("");
         setError("");
 

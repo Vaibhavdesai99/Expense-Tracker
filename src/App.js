@@ -9,6 +9,7 @@ import Navbar from "./Components/Nav/Navbar";
 import Profile from "./Components/Profile/Profile";
 import AuthContext from "./Components/Store/AuthContext";
 import ForgetPassword from "./Components/Auth/ForgetPassword";
+import Expense from "./Components/Expenses/Expense";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       {isLoggedIn && <Navbar />}
       <Routes>
+        <Route path="/Expenses" element={<Expense />} />
         <Route exact path="/SignUp" element={<SignUp />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/Home" element={<Home />} />
