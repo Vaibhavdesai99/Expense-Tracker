@@ -91,7 +91,7 @@ const LogIn = () => {
             )}
           </div>
           <div className="forgetPass">
-            <Link to="/">Forget Password</Link>
+            <Link to="/ForgetPassWord">Forget Password</Link>
           </div>
         </div>
       </form>
