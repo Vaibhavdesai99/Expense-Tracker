@@ -2,6 +2,7 @@ import React from "react";
 import "./ExpenseList.css";
 
 const ExpenseList = ({ expense }) => {
+  console.log(expense);
   return (
     <div className="ExpenseList">
       <h2>Expenses List :</h2>

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 const ExpenseForm = ({ onSubmitExpense }) => {
-  // console.log(onSubmitExpense);
   const [amount, setEnteredAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
-  const FormSubmitHandler = (e) => {
+  const FormSubmitHandler = async (e) => {
     e.preventDefault();
     const expenses = {
       amount: parseFloat(amount),
@@ -14,11 +13,37 @@ const ExpenseForm = ({ onSubmitExpense }) => {
       category: category,
     };
     onSubmitExpense(expenses);
-    // console.log(expenses);
     // Clear the input fields
     setEnteredAmount("");
     setDescription("");
     setCategory("");
+
+    try {
+      const response = await fetch(
+        "https://expensetracker-dailyexpenses-default-rtdb.firebaseio.com/DailyExpense.json",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            amount: expenses.amount,
+            description: expenses.description,
+            category: expenses.category,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        const error = await response.json();
+        console.log(error);
+      }
+    } catch (error) {
+      console.log("ERROR:", error);
+    }
   };
   return (
     <div>
