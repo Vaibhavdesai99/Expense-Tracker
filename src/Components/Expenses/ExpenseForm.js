@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import "./ExpenseForm.css";
-const ExpenseForm = ({ onSubmitExpense }) => {
+const ExpenseForm = ({ onSubmitExpense, selectedExpense, isEditing }) => {
   const [amount, setEnteredAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    if (selectedExpense && isEditing) {
+      setEnteredAmount(selectedExpense.amount);
+      setDescription(selectedExpense.description);
+      setCategory(selectedExpense.category);
+    } else {
+      setEnteredAmount("");
+      setDescription("");
+      setCategory("");
+    }
+  }, [selectedExpense, isEditing]);
 
   const FormSubmitHandler = async (e) => {
     e.preventDefault();
@@ -12,6 +25,7 @@ const ExpenseForm = ({ onSubmitExpense }) => {
       description: description,
       category: category,
     };
+    // Passing Data to parent : Expense.js
     onSubmitExpense(expenses);
     // Clear the input fields
     setEnteredAmount("");
@@ -33,10 +47,11 @@ const ExpenseForm = ({ onSubmitExpense }) => {
           },
         }
       );
-
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        const dataId = data.name;
+        expenses.id = dataId;
+        console.log(dataId);
       } else {
         const error = await response.json();
         console.log(error);
@@ -79,7 +94,7 @@ const ExpenseForm = ({ onSubmitExpense }) => {
               <option value="Shopping">Shopping</option>
             </select>
           </div>
-          <button>Add Expense</button>
+          <button>{isEditing ? "Update Expense" : "Add Expense"}</button>
         </div>
       </form>
     </div>

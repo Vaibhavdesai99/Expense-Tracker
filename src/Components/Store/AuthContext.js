@@ -3,6 +3,8 @@ import React, { useState } from "react";
 const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
+  // To delete individual expense:
+  // setDataId: (dataId) => {},
   login: (token) => {},
   logout: () => {},
 });
@@ -10,6 +12,7 @@ const AuthContext = React.createContext({
 export const AuthProvider = ({ children }) => {
   const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);
+  // const [dataId, setDataId] = useState("");
   const userisLoggedIn = !!token;
 
   //Storing the token to localStorage :
@@ -23,9 +26,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
   };
 
+  // const setDataIdHandler = (id) => {
+  //   setDataId(id);
+  // };
   const contextValue = {
     token: token,
     isLoggedIn: userisLoggedIn,
+    // setDataId: setDataIdHandler,
     login: loginHandler,
     logout: logoutHandler,
   };
