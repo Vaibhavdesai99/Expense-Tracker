@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./Components/Auth/SignUp";
 import LogIn from "./Components/Auth/LogIn";
@@ -7,18 +8,19 @@ import About from "./Components/About/About";
 import Product from "./Components/Product/Product";
 import Navbar from "./Components/Nav/Navbar";
 import Profile from "./Components/Profile/Profile";
-import AuthContext from "./Components/Store/AuthContext";
 import ForgetPassword from "./Components/Auth/ForgetPassword";
-import Expense from "./Components/Expenses/Expense";
+import Expenses from "./Components/Expenses/Expenses";
 
 function App() {
-  const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
+  // const authCtx = useContext(AuthContext);
+  // const isLoggedIn = authCtx.isLoggedIn;
   return (
     <BrowserRouter>
       {isLoggedIn && <Navbar />}
       <Routes>
-        <Route path="/Expenses" element={<Expense />} />
+        <Route path="/Expenses" element={<Expenses />} />
         <Route exact path="/SignUp" element={<SignUp />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/Home" element={<Home />} />

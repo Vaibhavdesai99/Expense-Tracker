@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import AuthContext from "../Store/AuthContext";
+import { authStates } from "../StoreRedux/auth-reducer";
+// import AuthContext from "../Store/AuthContext";
 const Navbar = () => {
-  const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  // const authCtx = useContext(AuthContext);
 
   // LogOut Handler:
   const logOut = () => {
-    authCtx.logout();
+    dispatch(authStates.logOut());
   };
   return (
     <nav className="navbar">

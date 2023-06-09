@@ -2,7 +2,14 @@ import React, { useRef, useState } from "react";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { authStates } from "../StoreRedux/auth-reducer";
+
 const SignUp = () => {
+  const dispatch = useDispatch();
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const [loadingText, setLoadingText] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -47,7 +54,9 @@ const SignUp = () => {
         const data = await response.json();
         navigate("/LogIn");
         console.log(data);
-        console.log(data.email);
+        console.log(data);
+        localStorage.setItem("idToken", data.idToken);
+        localStorage.setItem("userID", data.localId);
         alert("Successfully created account");
         setLoadingText("");
         setError("");
@@ -56,6 +65,9 @@ const SignUp = () => {
         emailRef.current.value = "";
         passwordRef.current.value = "";
         confirmPassRef.current.value = "";
+
+        // Dispatch the setLogin action to update the isLoggedIn state to true
+        dispatch(authStates.setLogin(true));
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -65,6 +77,9 @@ const SignUp = () => {
         setError(errorMessage);
         setLoadingText("");
         setSuccessMessage("");
+
+        //Dispatch the setLogin action to update the isLoggedIn state to false
+        dispatch(authStates.setLogin(false));
       }
     } catch (error) {
       console.log(error);

@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+// import { authStates } from "../StoreRedux/auth-reducer";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
+// import AuthContext from "../Store/AuthContext";
 const Home = () => {
-  const authCtx = useContext(AuthContext);
-  const idToken = authCtx.token;
+  const idToken = useSelector((state) => state.auth.idToken);
+  console.log(idToken);
+
+  // const authCtx = useContext(AuthContext);
+  // const idToken = authCtx.token;
   // console.log(idToken);
 
   // verify Email Handler :
@@ -26,6 +30,7 @@ const Home = () => {
       if (response.ok) {
         const data = await response.json();
         const emailverified = data.email;
+
         alert("Email Verified Successfully");
         console.log("email Verified: =>", emailverified);
       } else {

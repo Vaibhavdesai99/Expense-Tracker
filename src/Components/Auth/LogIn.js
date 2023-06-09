@@ -1,13 +1,19 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./LogIn.css";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
+// import AuthContext from "../Store/AuthContext";
+
+import { useDispatch } from "react-redux";
+import { authStates } from "../StoreRedux/auth-reducer";
+
 const LogIn = () => {
+  const dispatch = useDispatch();
+
   const [loadingText, setLoadingText] = useState("");
   const [error, setError] = useState("");
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
   const naviagte = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -40,8 +46,14 @@ const LogIn = () => {
         const data = await response.json();
         console.log(data);
 
+        localStorage.setItem("idToken", data.idToken);
+        localStorage.setItem("userID", data.localId);
+
+        // Dispatch the setLogin action to update the isLoggedIn state to true
+        dispatch(authStates.setLogin(true));
+
         // Passing token to login context then in that we store that token to localStorage
-        authCtx.login(data.idToken);
+        // authCtx.login(data.idToken);
         alert("Successfully Logged In ");
         setLoadingText("");
         setError("");
@@ -57,6 +69,8 @@ const LogIn = () => {
 
         setError(errorMessage);
         setLoadingText("");
+
+        dispatch(authStates.setLogin(false));
       }
     } catch (error) {
       setError("Network or other error occurred");

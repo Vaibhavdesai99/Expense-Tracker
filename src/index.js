@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import { AuthProvider } from "./Components/Store/AuthContext";
+import { Provider } from "react-redux";
+import store from "./Components/StoreRedux/index";
 import "./index.css";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthProvider>
+  <Provider store={store}>
     <App />
-  </AuthProvider>
+  </Provider>
 );
