@@ -224,7 +224,7 @@ const Expenses = () => {
             </div>
           </div>
 
-          <div>
+          <div className="addexpenses">
             <button className="AddExpense">Add Expense</button>
           </div>
         </form>
