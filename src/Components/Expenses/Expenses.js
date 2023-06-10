@@ -3,6 +3,7 @@ import "./Expenses.css";
 import SingleExpense from "./SingleExpense";
 import { useDispatch } from "react-redux";
 import { expenseAction } from "../StoreRedux/expense-Reducer";
+import { CSVLink } from "react-csv";
 
 const Expenses = () => {
   const [expenses, setExpenses] = useState([]);
@@ -10,7 +11,7 @@ const Expenses = () => {
   const [description, setDescription] = useState("");
   const [isEdit, setEdit] = useState(false);
   const [expenseId, setExpenseId] = useState(null);
-  const [csvData, setCsv] = useState("No Data");
+  const [csvData, setCsv] = useState("No data Currently");
   const initialState = () => {
     const value = "Food";
     return value;
@@ -23,54 +24,49 @@ const Expenses = () => {
     setCategory(event.target.value);
   };
 
-  const getExpenses = useCallback(() => {
-    fetch(
-      `https://react-http-efb57-default-rtdb.firebaseio.com/${email}.json`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const getExpenses = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}.json`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        const data = await response.json();
+        let errorMessage = "Authentication Failed";
+        if (data && data.error && data.error.message) {
+          errorMessage = data.error.message;
+        }
+        throw new Error(errorMessage);
       }
-    )
-      .then((response) => {
-        if (response) {
-          return response.json();
-        } else {
-          response.json().then((data) => {
-            let errorMessage = "Authotication Failed";
-            if (data && data.error && data.error.message) {
-              errorMessage = data.error.message;
-            }
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        let arr = [];
-        for (let key in data) {
-          arr.push({
-            id: key,
-            description: data[key].description,
-            amount: data[key].amount,
-            category: data[key].category,
-          });
-        }
-        setCsv(arr);
-        setExpenses(arr);
-        localStorage.setItem("allExpense", JSON.stringify(arr));
-        dispatch(expenseAction.addExpenses(expenses));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      const data = await response.json();
+      console.log(data);
+      let arr = [];
+      for (let key in data) {
+        // console.log(key);
+        arr.push({
+          id: key,
+          description: data[key].description,
+          amount: data[key].amount,
+          category: data[key].category,
+        });
+      }
+      setCsv(arr);
+      setExpenses(arr);
+      localStorage.setItem("allExpense", JSON.stringify(arr));
+      dispatch(expenseAction.addExpenses(expenses));
+    } catch (err) {
+      console.log(err);
+    }
   }, [dispatch, email, expenses]);
 
-  const expenseFormHandler = (event) => {
+  const expenseFormHandler = async (event) => {
     event.preventDefault();
     if (isEdit === true) {
-      //
       const data = {
         amount: amount,
         description: description,
@@ -79,26 +75,25 @@ const Expenses = () => {
       dispatch(expenseAction.addAmount(amount));
       dispatch(expenseAction.addDesc(description));
       dispatch(expenseAction.addCategory(category));
-      fetch(
-        `https://react-http-efb57-default-rtdb.firebaseio.com/${email}/${expenseId}.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          console.log(response);
-          getExpenses();
-          setAmount(0);
-          setDescription("");
-          setCategory(initialState);
-        })
-        .catch((err) => {
-          alert(err);
-        });
+      try {
+        const response = await fetch(
+          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}/${expenseId}.json`,
+          {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response);
+        getExpenses();
+        setAmount(0);
+        setDescription("");
+        setCategory(initialState);
+      } catch (err) {
+        alert(err);
+      }
     } else {
       const data = {
         amount: amount,
@@ -108,27 +103,25 @@ const Expenses = () => {
       dispatch(expenseAction.addAmount(amount));
       dispatch(expenseAction.addDesc(description));
       dispatch(expenseAction.addCategory(category));
-
-      fetch(
-        `https://react-http-efb57-default-rtdb.firebaseio.com/${email}.json`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          console.log(response);
-          setAmount(0);
-          setDescription("");
-          setCategory(initialState);
-          getExpenses();
-        })
-        .catch((err) => {
-          alert(err);
-        });
+      try {
+        const response = await fetch(
+          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}.json`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response);
+        setAmount(0);
+        setDescription("");
+        setCategory(initialState);
+        getExpenses();
+      } catch (err) {
+        alert(err);
+      }
     }
 
     setExpenses((prevExp) => {
@@ -149,23 +142,23 @@ const Expenses = () => {
     setCategory(editExpense[0].category);
     console.log(editExpense);
   };
-  const deleteHandler = (id) => {
-    fetch(
-      `https://react-http-efb57-default-rtdb.firebaseio.com/${email}/${id}.json`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        console.log(response);
-        getExpenses();
-      })
-      .catch((err) => {
-        alert(err);
-      });
+
+  const deleteHandler = async (id) => {
+    try {
+      const response = await fetch(
+        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}/${id}.json`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+      getExpenses();
+    } catch (err) {
+      alert(err);
+    }
   };
 
   useEffect(() => {
@@ -186,6 +179,7 @@ const Expenses = () => {
       key: "category",
     },
   ];
+
   return (
     <>
       <div className="form">
@@ -245,6 +239,11 @@ const Expenses = () => {
           );
         })}
       </div>
+      <button className="CSVfile">
+        <CSVLink data={csvData} headers={header} filename={"expenses.csv"}>
+          Download File
+        </CSVLink>
+      </button>
     </>
   );
 };

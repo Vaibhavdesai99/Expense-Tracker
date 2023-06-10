@@ -1,0 +1,16 @@
+/* App.css */
+.App {
+  background-color: rgb(13, 10, 15);
+  color: white;
+  /* Common styles for both themes */
+}
+
+.App.light {
+  background-color: #ffffff; /* Set the background color for the light theme */
+  color: #000000; /* Set the text color for the light theme */
+}
+
+.App.dark {
+  background-color: #130a0a; /* Set the background color for the dark theme */
+  color: #ffffff; /* Set the text color for the dark theme */
+}

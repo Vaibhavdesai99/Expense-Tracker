@@ -1,7 +1,13 @@
 import React from "react";
 import "./SingleExpense.css";
-
+import { useDispatch } from "react-redux";
+import { toggleTheme } from "../StoreRedux/theme-Reducer";
 const SingleExpense = (props) => {
+  const dispatch = useDispatch();
+
+  const handelTogglebutton = () => {
+    dispatch(toggleTheme());
+  };
   return (
     <tr className="expense-item">
       <th>
@@ -29,7 +35,9 @@ const SingleExpense = (props) => {
       </td>
       <td>
         {props.amount > 10000 && (
-          <button className="premium-btn">Premium</button>
+          <button onClick={handelTogglebutton} className="premium-btn">
+            Premium
+          </button>
         )}
       </td>
     </tr>

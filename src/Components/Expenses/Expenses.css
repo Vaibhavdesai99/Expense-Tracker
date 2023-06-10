@@ -57,3 +57,12 @@ input,
   background: #6969c2;
   font-weight: bold;
 }
+
+.CSVfile {
+  padding: 8px 24px;
+  text-align: center;
+  border: 10 px solid;
+  border: 3px solid black;
+  text-decoration: none;
+  font-weight: bold;
+}
