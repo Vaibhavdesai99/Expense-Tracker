@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { authStates } from "../StoreRedux/auth-reducer";
 // import AuthContext from "../Store/AuthContext";
+import { toggleTheme } from "../StoreRedux/theme-Reducer";
 const Navbar = () => {
   const dispatch = useDispatch();
   // const authCtx = useContext(AuthContext);
@@ -10,6 +11,7 @@ const Navbar = () => {
   // LogOut Handler:
   const logOut = () => {
     dispatch(authStates.logOut());
+    dispatch(toggleTheme("light"));
   };
   return (
     <nav className="navbar">

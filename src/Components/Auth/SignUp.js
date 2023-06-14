@@ -55,8 +55,8 @@ const SignUp = () => {
         navigate("/LogIn");
         console.log(data);
         console.log(data);
-        localStorage.setItem("idToken", data.idToken);
-        localStorage.setItem("userID", data.localId);
+        // localStorage.setItem("idToken", data.idToken);
+        // localStorage.setItem("userID", data.localId);
         alert("Successfully created account");
         setLoadingText("");
         setError("");

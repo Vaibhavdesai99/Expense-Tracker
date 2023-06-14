@@ -48,6 +48,7 @@ const LogIn = () => {
 
         localStorage.setItem("idToken", data.idToken);
         localStorage.setItem("userID", data.localId);
+        localStorage.setItem("email", data.email);
 
         // Dispatch the setLogin action to update the isLoggedIn state to true
         dispatch(authStates.setLogin(true));

@@ -19,7 +19,8 @@ const Expenses = () => {
   const [category, setCategory] = useState(initialState);
   const dispatch = useDispatch();
 
-  const email = localStorage.getItem("email");
+  const userID = localStorage.getItem("userID");
+  console.log(userID);
   const categoryHandler = (event) => {
     setCategory(event.target.value);
   };
@@ -27,7 +28,7 @@ const Expenses = () => {
   const getExpenses = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}.json`,
+        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${userID}.json`,
         {
           method: "GET",
           headers: {
@@ -62,7 +63,7 @@ const Expenses = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [dispatch, email, expenses]);
+  }, [dispatch, userID, expenses]);
 
   const expenseFormHandler = async (event) => {
     event.preventDefault();
@@ -77,7 +78,7 @@ const Expenses = () => {
       dispatch(expenseAction.addCategory(category));
       try {
         const response = await fetch(
-          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}/${expenseId}.json`,
+          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${userID}/${expenseId}.json`,
           {
             method: "PUT",
             body: JSON.stringify(data),
@@ -105,7 +106,7 @@ const Expenses = () => {
       dispatch(expenseAction.addCategory(category));
       try {
         const response = await fetch(
-          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}.json`,
+          `https://expensedemodailyexp-default-rtdb.firebaseio.com/${userID}.json`,
           {
             method: "POST",
             body: JSON.stringify(data),
@@ -146,7 +147,7 @@ const Expenses = () => {
   const deleteHandler = async (id) => {
     try {
       const response = await fetch(
-        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${email}/${id}.json`,
+        `https://expensedemodailyexp-default-rtdb.firebaseio.com/${userID}/${id}.json`,
         {
           method: "DELETE",
           headers: {

@@ -34,7 +34,7 @@ const SingleExpense = (props) => {
         </button>
       </td>
       <td>
-        {props.amount > 10000 && (
+        {props.amount > 1000 && (
           <button onClick={handelTogglebutton} className="premium-btn">
             Premium
           </button>

@@ -1,16 +1,19 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Profile.css";
-import AuthContext from "../Store/AuthContext";
+import { useSelector } from "react-redux";
+// import AuthContext from "../Store/AuthContext";
 import GitHubLogo from "@iconscout/react-unicons/icons/uil-github";
 import InternetLogo from "@iconscout/react-unicons/icons/uil-browser";
+// import { authStates } from "../StoreRedux/auth-reducer";
 
 const Profile = () => {
   const [error, setError] = useState(null);
   const [fullName, setFullName] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const authCtx = useContext(AuthContext);
-  const idToken = authCtx.token;
-  //console.log(idToken);
+  // const authCtx = useContext(AuthContext);
+
+  const idToken = useSelector((state) => state.auth.idToken);
+  console.log(idToken);
 
   const name = useRef();
   const photo_URL = useRef();
