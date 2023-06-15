@@ -42,14 +42,13 @@ const LogIn = () => {
       );
       console.log(response);
       if (response.ok) {
-        naviagte("/Home");
         const data = await response.json();
         console.log(data);
 
-        localStorage.setItem("idToken", data.idToken);
+        localStorage.setItem("token", data.idToken);
         localStorage.setItem("userID", data.localId);
         localStorage.setItem("email", data.email);
-
+        naviagte("/Home");
         // Dispatch the setLogin action to update the isLoggedIn state to true
         dispatch(authStates.setLogin(true));
 

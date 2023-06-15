@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const useridToken = localStorage.getItem("idToken")
-  ? localStorage.getItem("idToken")
-  : "";
-const userLocalID = localStorage.getItem("userID")
-  ? localStorage.getItem("userID")
-  : "";
+const useridToken = localStorage.getItem("token") || null;
+
+const userLocalID = localStorage.getItem("userID") || null;
 
 const initialState = {
   isLoggedIn: !!useridToken,
@@ -34,8 +31,9 @@ const authSlice = createSlice({
       state.idToken = "";
       state.userID = "";
       state.isEmailVerified = false;
-      localStorage.removeItem("idToken");
+      localStorage.removeItem("token");
       localStorage.removeItem("userID");
+      localStorage.removeItem("email");
     },
   },
 });

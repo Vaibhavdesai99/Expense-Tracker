@@ -16,7 +16,7 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const theme = useSelector((state) => state.theme);
   console.log(theme);
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
   return (

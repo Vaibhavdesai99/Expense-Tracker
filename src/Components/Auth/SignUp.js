@@ -54,9 +54,7 @@ const SignUp = () => {
         const data = await response.json();
         navigate("/LogIn");
         console.log(data);
-        console.log(data);
-        // localStorage.setItem("idToken", data.idToken);
-        // localStorage.setItem("userID", data.localId);
+
         alert("Successfully created account");
         setLoadingText("");
         setError("");
@@ -65,9 +63,6 @@ const SignUp = () => {
         emailRef.current.value = "";
         passwordRef.current.value = "";
         confirmPassRef.current.value = "";
-
-        // Dispatch the setLogin action to update the isLoggedIn state to true
-        dispatch(authStates.setLogin(true));
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -77,9 +72,6 @@ const SignUp = () => {
         setError(errorMessage);
         setLoadingText("");
         setSuccessMessage("");
-
-        //Dispatch the setLogin action to update the isLoggedIn state to false
-        dispatch(authStates.setLogin(false));
       }
     } catch (error) {
       console.log(error);

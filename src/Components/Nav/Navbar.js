@@ -2,16 +2,21 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { authStates } from "../StoreRedux/auth-reducer";
-// import AuthContext from "../Store/AuthContext";
 import { toggleTheme } from "../StoreRedux/theme-Reducer";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   // const authCtx = useContext(AuthContext);
 
   // LogOut Handler:
   const logOut = () => {
     dispatch(authStates.logOut());
-    dispatch(toggleTheme("light"));
+
+    if (theme === "Dark") {
+      dispatch(toggleTheme("light"));
+    }
+    console.log(theme);
   };
   return (
     <nav className="navbar">

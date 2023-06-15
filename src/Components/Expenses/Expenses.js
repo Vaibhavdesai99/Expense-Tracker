@@ -20,7 +20,7 @@ const Expenses = () => {
   const dispatch = useDispatch();
 
   const userID = localStorage.getItem("userID");
-  console.log(userID);
+  // console.log(userID);
   const categoryHandler = (event) => {
     setCategory(event.target.value);
   };
@@ -45,7 +45,7 @@ const Expenses = () => {
         throw new Error(errorMessage);
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       let arr = [];
       for (let key in data) {
         // console.log(key);
