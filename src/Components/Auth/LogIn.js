@@ -98,11 +98,7 @@ const LogIn = () => {
           </div>
           {error && <p>{error}</p>}
           <div className="SignUpBtn">
-            {!loadingText ? (
-              <button type="submit">LogIn</button>
-            ) : (
-              <p>{loadingText}</p>
-            )}
+            {!loadingText ? <button>LogIn</button> : <p>{loadingText}</p>}
           </div>
           <div className="forgetPass">
             <Link to="/ForgetPassWord">Forget Password</Link>

@@ -31,11 +31,11 @@ const Navbar = () => {
             About
           </Link>
         </li>
-        <li className="navbar__item">
+        {/* <li className="navbar__item">
           <Link to="/products" className="navbar__link">
             Products
           </Link>
-        </li>
+        </li> */}
 
         <li className="navbar__item">
           <Link to="/Expenses" className="navbar__link">

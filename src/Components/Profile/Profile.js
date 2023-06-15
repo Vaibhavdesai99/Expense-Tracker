@@ -111,7 +111,7 @@ const Profile = () => {
           Contact Details
         </h1>
 
-        <div className="container">
+        <div className="containerr">
           <div className="name">
             <GitHubLogo size="3rem" color="black" />
             <label>Full Name </label>
@@ -133,8 +133,8 @@ const Profile = () => {
             />
           </div>
         </div>
-        <div className="btn">
-          <button type="submit">Update</button>
+        <div className="btnclass">
+          <button>Update</button>
         </div>
       </form>
       {error && <div className="error">{error}</div>}

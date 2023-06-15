@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 // import { authStates } from "../StoreRedux/auth-reducer";
 import "./Home.css";
 import { Link } from "react-router-dom";
+
 // import AuthContext from "../Store/AuthContext";
 const Home = () => {
   const idToken = useSelector((state) => state.auth.idToken);
@@ -44,7 +45,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="homeContainer">
       <div className="main_div">
         Welcome To Expense Tracker
         <div className="complete_profile">
@@ -72,13 +73,16 @@ const Home = () => {
           alignItems: "center",
           justifyContent: "center",
           marginTop: "5rem",
+          position: "relative",
+          top: "-10rem",
+          color: "black",
         }}
       >
-        <h1 style={{ color: "red" }}>Verify Your Email Here...!</h1>
+        <h1 style={{ color: "black" }}>Verify Your Email Here...!</h1>
         <button
           style={{
             padding: "3px 9px",
-            backgroundColor: "red",
+            backgroundColor: "black",
             color: "white",
             borderRadius: "5px",
           }}
@@ -87,7 +91,7 @@ const Home = () => {
           Verify Email
         </button>
       </div>
-    </>
+    </div>
   );
 };
 export default Home;

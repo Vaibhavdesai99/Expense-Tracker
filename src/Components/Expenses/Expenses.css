@@ -1,68 +1,71 @@
-.container {
-  margin: 20px;
-}
-
-.form {
+.form-container {
   margin-bottom: 20px;
 }
 
-.allInput {
+.expense-form {
   display: flex;
-
   flex-direction: column;
-  width: 30%;
+  gap: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 50%;
   margin-left: 20rem;
+  margin-top: 4rem;
 }
 
-.form-input,
-.select {
-  flex: 1;
-  margin-right: 10px;
+.form-input h5,
+.add-expense-container h5 {
+  margin: 0;
 }
 
-input,
-.select {
-  width: 100%;
+.amount-input,
+.description-input,
+.category-select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
 }
 
-.btn {
-  padding: 8px 16px;
+.add-expense-button {
   background-color: #4caf50;
   color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-expense-button:hover {
+  background-color: #45a049;
+}
+
+.add-expense-button:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
+
+.add-expense-button:disabled:hover {
+  background-color: #a9a9a9;
+}
+
+.expense-list-container {
+  margin-bottom: 20px;
+  margin-left: 20rem;
+}
+
+.download-csv-button {
+  background-color: #3498db;
+  color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-}
-
-.input {
-  display: flex;
-  width: 44%;
-  padding: 6px;
-}
-
-.AddExpense {
+  transition: background-color 0.3s ease;
+  margin-left: 34rem;
   margin-top: 3rem;
-  margin-left: 20rem;
-  padding: 10px 19px;
-  border-radius: 10px;
-  color: white;
-  background: #6969c2;
-  font-weight: bold;
 }
 
-.CSVfile {
-  padding: 8px 24px;
-  text-align: center;
-  border: 10 px solid;
-  border: 3px solid black;
-  text-decoration: none;
-  font-weight: bold;
+.download-csv-button:hover {
+  background-color: #2980b9;
 }

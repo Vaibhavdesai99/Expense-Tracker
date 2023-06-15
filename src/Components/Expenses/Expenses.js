@@ -183,49 +183,55 @@ const Expenses = () => {
 
   return (
     <>
-      <div className="form">
-        <form onSubmit={expenseFormHandler}>
-          <div className="allInput">
-            <div className="form-input">
-              <h5>Enter Amount</h5>
-              <input
-                type="number"
-                value={amount}
-                onChange={(event) => setAmount(event.target.value)}
-              />
-            </div>
-            <div>
-              <h5>Description</h5>
-              <input
-                type="text"
-                value={description}
-                placeholder="Enter description"
-                onChange={(event) => setDescription(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <h5>ADD CATEGORY</h5>
-              <select
-                className="input"
-                id="category"
-                onChange={categoryHandler}
-                value={category}
-              >
-                <option value="Food">Food</option>
-                <option value="Petrol">Petrol</option>
-                <option value="Salary">Salary</option>
-              </select>
-            </div>
+      <div className="form-container">
+        <form onSubmit={expenseFormHandler} className="expense-form">
+          <div className="form-input">
+            <label>Enter Amount</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
+              className="amount-input"
+            />
+          </div>
+          <div>
+            <label>Description</label>
+            <input
+              type="text"
+              value={description}
+              placeholder="Enter description"
+              onChange={(event) => setDescription(event.target.value)}
+              required
+              className="description-input"
+            />
+          </div>
+          <div>
+            <label>Add Category</label>
+            <select
+              className="category-select"
+              id="category"
+              onChange={categoryHandler}
+              value={category}
+            >
+              <option value="Food">Food</option>
+              <option value="Petrol">Petrol</option>
+              <option value="Salary">Salary</option>
+            </select>
           </div>
 
-          <div className="addexpenses">
-            <button className="AddExpense">Add Expense</button>
+          <div className="add-expense-container">
+            <button className="add-expense-button">Add Expense</button>
           </div>
         </form>
+        <hr></hr>
+        <button className="download-csv-button">
+          <CSVLink data={csvData} headers={header} filename={"expenses.csv"}>
+            Download File
+          </CSVLink>
+        </button>
       </div>
 
-      <div className="form">
+      <div className="expense-list-container">
         {expenses.map((expense, index) => {
           return (
             <SingleExpense
@@ -240,11 +246,6 @@ const Expenses = () => {
           );
         })}
       </div>
-      <button className="CSVfile">
-        <CSVLink data={csvData} headers={header} filename={"expenses.csv"}>
-          Download File
-        </CSVLink>
-      </button>
     </>
   );
 };

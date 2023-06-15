@@ -112,11 +112,7 @@ const SignUp = () => {
             )}
           </div>
           <div className="SignUpBtn">
-            {!loadingText ? (
-              <button type="submit">SignUp</button>
-            ) : (
-              <p>{loadingText}</p>
-            )}
+            {!loadingText ? <button>SignUp</button> : <p>{loadingText}</p>}
           </div>
         </div>
       </form>

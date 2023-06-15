@@ -9,7 +9,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 0;
+  position: relative;
+  bottom: 15rem;
+  margin-top: 20rem;
 }
 
 .rightSide {
@@ -18,4 +20,13 @@
   justify-content: center;
   gap: 1rem;
   margin-right: 1rem;
+}
+
+.homeContainer {
+  background-image: url("../Images/pexels-monstera-6289064\ \(2\).jpg");
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  background-position: center;
+  background-size: 100% auto;
 }
